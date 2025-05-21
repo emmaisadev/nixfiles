@@ -16,7 +16,7 @@
           modules = [
             ./system/machine/MBP-Asahi/configuration.nix
 	    ./emmathorpe/user.nix
-	    ./emmathorpe/swaymw.nix
+	    ./emmathorpe/swaywm.nix
 	    home-manager.nixosModules.home-manager
 	    {
 		home-manager.useGlobalPkgs = true;

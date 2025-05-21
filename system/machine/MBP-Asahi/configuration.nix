@@ -49,7 +49,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # Specify path to peripheral firmware files.
-  hardware.asahi.peripheralFirmwareDirectory = ./firmware; 
+  hardware.asahi.peripheralFirmwareDirectory = ../../modules/firmware; 
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
