@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../modules/apple-silicon-support
+      ../../modules/apple-silicon-support
     ];
 
   # Use the systemd-boot EFI boot loader.
