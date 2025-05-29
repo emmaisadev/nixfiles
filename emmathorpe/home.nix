@@ -15,16 +15,16 @@
 		};
 		syntaxHighlighting.enable = true;
 		initContent = lib.mkOrder 1500 ''
-				if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-					exec sway
-				fi
-				if [ "$SSH_CLIENT" ] || [ "$SSH_TTY" ]; then
-					export PS1=%M\ $PS1
-				fi
-			'';
+			if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+				exec sway
+			fi
+			if [ "$SSH_CLIENT" ] || [ "$SSH_TTY" ]; then
+				export PS1=%M\ $PS1
+			fi
+		'';
 		envExtra = ''
 			alias cls=clear
-			'';
+		'';
 	};
 	programs.tmux = {
 		enable = true;
@@ -45,25 +45,34 @@
 	};
 	home.stateVersion = "25.05";
 	home.pointerCursor = {
-	  	gtk.enable = true;
-	  	x11 = {
-			enable = true;
-			defaultCursor = "Adwaita";
-		};
-	  	package = pkgs.adwaita-icon-theme;
-	  	name = "Adwaita";
-	  	size = 24;
+	  gtk.enable = true;
+	  x11 = {
+		  enable = true;
+		  defaultCursor = "Adwaita";
+	  };
+    package = pkgs.adwaita-icon-theme;
+    name = "Adwaita";
+    size = 24;
 	};
 	home.packages = [
 		pkgs.element-desktop
 	];
 	home.sessionVariables = {
 		MOZ_USE_XINPUT2 = "1";
-  		# only needed for Sway
-  		XDG_CURRENT_DESKTOP = "sway"; 
+  	# only needed for Sway
+  	XDG_CURRENT_DESKTOP = "sway"; 
 	};
 	programs.vim = {
 		enable = true;
-		defaultEditor = true;
+    defaultEditor = true;
+    plugins = with pkgs.vimPlugins; [ nerdtree ale vim-fugitive vim-indent-guides ];
+    settings = {
+      expandtab = false;
+      tabstop = 2;
+      shiftwidth = 2;
+    };
+    extraConfig = ''
+      let g:indent_guides_enable_on_vim_startup = 1
+    '';
 	};	
 }
