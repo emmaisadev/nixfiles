@@ -23,7 +23,6 @@
 				fi
 			'';
 		envExtra = ''
-			export EDITOR=vim
 			alias cls=clear
 			'';
 	};
@@ -62,5 +61,9 @@
 		MOZ_USE_XINPUT2 = "1";
   		# only needed for Sway
   		XDG_CURRENT_DESKTOP = "sway"; 
+	};
+	programs.vim = {
+		enable = true;
+		defaultEditor = true;
 	};	
 }

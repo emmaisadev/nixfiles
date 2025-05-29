@@ -24,7 +24,7 @@ in
         			export WINIT_UNIX_BACKEND=x11
         			export MOZ_ENABLE_WAYLAND=1
 			'';
-			extraPackages = with pkgs; [ brightnessctl foot grim swayidle swaylock i3status-rust sway-launcher-desktop dunst ];
+			extraPackages = with pkgs; [ brightnessctl foot grim swayidle swaylock i3status-rust sway-launcher-desktop dunst pavucontrol ];
 		};
 		fonts.packages = with pkgs; [
 			noto-fonts
