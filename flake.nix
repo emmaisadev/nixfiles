@@ -35,6 +35,7 @@
 		      home-manager.useGlobalPkgs = true;
 		      home-manager.useUserPackages = true;
 		      home-manager.users.emmathorpe = import ./emmathorpe/home.nix;
+		      home-manager.users.emmathorpe = import ./system/modules/work/default.nix;
 	      }
       ];
     };
