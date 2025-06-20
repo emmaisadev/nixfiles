@@ -12,4 +12,9 @@
 	pkgs.kubelogin
 	pkgs.curl
   ];
+	programs.tmux = {
+		extraConfig = ''
+			set -g status-right "#(/run/current-system/sw/bin/bash $HOME/code/kube-tmux/kube.tmux 250 red black)"		
+'';
+	};
 }
