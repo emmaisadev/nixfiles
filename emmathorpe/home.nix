@@ -72,7 +72,14 @@
     };
     extraConfig = ''
       let g:indent_guides_enable_on_vim_startup = 1
-    '';
+      if v:version < 802
+        packadd! peaksea
+      endif
+      syntax enable
+      colorscheme peaksea
+      set termguicolors
+      set background=dark
+      '';
   };
   programs.git = {
     enable = true;
