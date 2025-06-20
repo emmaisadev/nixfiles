@@ -32,10 +32,9 @@
 		terminal = "tmux-direct";
 		newSession = true;
 		keyMode = "vi";
-		historyLimit = 50000;
+    historyLimit = 50000;
+    mouse = true;
 		extraConfig = ''
-			# Enable mouse support
-			set -g mouse on
 			# Set pane navigation
 			bind -n M-Left select-pane -L
 			bind -n M-Right select-pane -R
@@ -79,5 +78,13 @@
     enable = true;
     package = pkgs.gitFull;
     userName = "Emma Thorpe";
+    extraConfig = {
+      push = {
+        autoSetupRemote = true;
+      };
+    };
+    delta = {
+      enable = true;
+    };
   };  
 }
