@@ -2,20 +2,22 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../modules/apple-silicon-support
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   networking.hostName = "Emma-Asahi"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -36,20 +38,22 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
-   console = {
-#     font = "Lat2-Terminus16";
-     keyMap = "dvorak";
-  #   useXkbConfig = true; # use xkb.options in tty.
-   };
+  console = {
+    #     font = "Lat2-Terminus16";
+    keyMap = "dvorak";
+    #   useXkbConfig = true; # use xkb.options in tty.
+  };
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
   features.swayDesktop.enable = true;
-  nixpkgs.config.allowUnfree = true;
+
+  # Allow swaylock to authenticate (no fingerprint reader on this machine).
+  security.pam.services.swaylock = { };
 
   # Specify path to peripheral firmware files.
-  hardware.asahi.peripheralFirmwareDirectory = ../../modules/firmware; 
+  hardware.asahi.peripheralFirmwareDirectory = ../../modules/firmware;
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -83,7 +87,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #   wget
+    #   wget
     git
     asahi-bless
     asahi-nvram
@@ -93,8 +97,6 @@
     ppp
     iptables
   ];
-
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -140,4 +142,3 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-

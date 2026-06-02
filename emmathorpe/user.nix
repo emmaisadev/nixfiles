@@ -1,23 +1,27 @@
-{ config, pkgs, inputs, lib, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 
 {
-	programs.zsh.enable = true;
-	users.users.emmathorpe = {
-		isNormalUser = true;
-		home = "/home/emmathorpe";
-		description = "Emma Thorpe";
-		extraGroups = [ "wheel" "docker" ];
-		shell = pkgs.zsh;
-		packages =  lib.mkIf (config.features.swayDesktop.enable == true) [
-			pkgs.legcord
-			#pkgs.plex-desktop
-			#pkgs.plexamp
-		];
-	};
-	programs.firefox = lib.mkIf(config.features.swayDesktop.enable == true) {
-		enable = true;
-	};
-	programs.thunderbird = lib.mkIf(config.features.swayDesktop.enable == true) {
-		enable = true;
-	};
+  programs.zsh.enable = true;
+  users.users.emmathorpe = {
+    isNormalUser = true;
+    home = "/home/emmathorpe";
+    description = "Emma Thorpe";
+    extraGroups = [
+      "wheel"
+      "docker"
+    ];
+    shell = pkgs.zsh;
+  };
+  programs.firefox = lib.mkIf (config.features.swayDesktop.enable == true) {
+    enable = true;
+  };
+  programs.thunderbird = lib.mkIf (config.features.swayDesktop.enable == true) {
+    enable = true;
+  };
 }

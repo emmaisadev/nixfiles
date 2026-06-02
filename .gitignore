@@ -1,1 +1,4 @@
 system/modules/firmware/*
+
+# vim swap files
+*.swp
