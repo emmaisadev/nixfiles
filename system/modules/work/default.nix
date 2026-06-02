@@ -1,11 +1,11 @@
-{ config, pkgs, inputs, lib, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 
-let
-  unstable = import inputs.nixpkgs-unstable {
-    inherit (pkgs.stdenv.hostPlatform) system;
-    config.allowUnfree = true;
-  };
-in
 {
   programs.git = {
     settings = {
@@ -19,10 +19,10 @@ in
   home.packages = [
     pkgs.kubectl
     pkgs.argo-rollouts
-	  pkgs.tenv
-	  pkgs.kubernetes-helm
-	  pkgs.azure-cli
-	  pkgs.kubelogin
+    pkgs.tenv
+    pkgs.kubernetes-helm
+    pkgs.azure-cli
+    pkgs.kubelogin
     pkgs.curl
     pkgs.notation
     pkgs.powershell
@@ -37,16 +37,16 @@ in
     pkgs.automake
     pkgs.pkg-config
     pkgs.wget
-    unstable.claude-code
+    pkgs.claude-code
     pkgs.google-cloud-sdk
   ];
   home.shellAliases = {
     docker = "/run/current-system/sw/bin/docker";
   };
-	programs.tmux = {
-		extraConfig = ''
-			set -g status-right "#(/run/current-system/sw/bin/bash $HOME/code/kube-tmux/kube.tmux 250 red black)"		
-'';
+  programs.tmux = {
+    extraConfig = ''
+      			set -g status-right "#(/run/current-system/sw/bin/bash $HOME/code/kube-tmux/kube.tmux 250 red black)"		
+    '';
   };
   programs.go = {
     enable = true;
