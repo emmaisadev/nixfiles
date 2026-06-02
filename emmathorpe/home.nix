@@ -54,7 +54,8 @@
     size = 24;
 	};
 	home.packages = [
-		pkgs.element-desktop
+    pkgs.element-desktop
+    pkgs.commitizen
 	];
 	home.sessionVariables = {
 		MOZ_USE_XINPUT2 = "1";
@@ -79,19 +80,24 @@
       colorscheme peaksea
       set termguicolors
       set background=dark
+      au BufNewFile,BufRead *Jenkinsfile setf groovy
       '';
   };
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
-    userName = "Emma Thorpe";
-    extraConfig = {
+    settings = {
+      user.name = "Emma Thorpe";
       push = {
         autoSetupRemote = true;
       };
+      init = {
+        defaultBranch = "main";
+      };
     };
-    delta = {
-      enable = true;
-    };
-  };  
+  };
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+  };
 }
