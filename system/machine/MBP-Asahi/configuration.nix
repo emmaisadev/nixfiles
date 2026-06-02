@@ -13,17 +13,11 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/apple-silicon-support
   ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
 
   networking.hostName = "Emma-Asahi"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -54,7 +48,6 @@
   # services.xserver.enable = true;
 
   features.swayDesktop.enable = true;
-  nixpkgs.config.allowUnfree = true;
 
   # Specify path to peripheral firmware files.
   hardware.asahi.peripheralFirmwareDirectory = ../../modules/firmware;

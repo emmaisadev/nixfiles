@@ -2,12 +2,14 @@
   description = "NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-apple-silicon.url = "github:nix-community/nixos-apple-silicon";
+    nixos-apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -17,6 +19,7 @@
       nixpkgs-unstable,
       home-manager,
       nixos-wsl,
+      nixos-apple-silicon,
       ...
     }:
     let
@@ -39,7 +42,17 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./emmathorpe/user.nix
-            { nixpkgs.overlays = overlays; }
+            {
+              nixpkgs.overlays = overlays;
+              nixpkgs.config.allowUnfree = true;
+              nix.settings.experimental-features = [
+                "nix-command"
+                "flakes"
+              ];
+              # Make `nix shell nixpkgs#...` and <nixpkgs> use the pinned nixpkgs.
+              nix.registry.nixpkgs.flake = nixpkgs;
+              nix.nixPath = [ "nixpkgs=${nixpkgs}" ];
+            }
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -63,6 +76,7 @@
           system = "aarch64-linux";
           extraModules = [
             ./system/machine/MBP-Asahi/configuration.nix
+            nixos-apple-silicon.nixosModules.default
             ./emmathorpe/swaywm.nix
             { home-manager.users.emmathorpe = import ./emmathorpe/home.nix; }
           ];

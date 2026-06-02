@@ -78,14 +78,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     git
-    neofetch
+    fastfetch
     #   wget
-  ];
-  nixpkgs.config.allowUnfree = true;
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
