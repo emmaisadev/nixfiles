@@ -47,5 +47,14 @@ in
       noto-fonts-color-emoji
       font-awesome
     ];
+
+    # Desktop portals: enables screen sharing (wlroots) and native file pickers
+    # for Wayland apps such as Element and Firefox.
+    xdg.portal = {
+      enable = true;
+      wlr.enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      config.common.default = "*";
+    };
   };
 }

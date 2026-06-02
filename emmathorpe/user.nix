@@ -17,11 +17,6 @@
       "docker"
     ];
     shell = pkgs.zsh;
-    packages = lib.mkIf (config.features.swayDesktop.enable == true) [
-      pkgs.legcord
-      #pkgs.plex-desktop
-      #pkgs.plexamp
-    ];
   };
   programs.firefox = lib.mkIf (config.features.swayDesktop.enable == true) {
     enable = true;

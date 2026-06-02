@@ -95,7 +95,12 @@
               ./system/machine/MBP-Asahi/configuration.nix
               nixos-apple-silicon.nixosModules.default
               ./emmathorpe/swaywm.nix
-              { home-manager.users.emmathorpe = import ./emmathorpe/home.nix; }
+              {
+                home-manager.users.emmathorpe.imports = [
+                  ./emmathorpe/home
+                  ./emmathorpe/home/desktop.nix
+                ];
+              }
             ];
           };
 
@@ -104,7 +109,12 @@
             modules = [
               ./system/machine/X1/configuration.nix
               ./emmathorpe/swaywm.nix
-              { home-manager.users.emmathorpe = import ./emmathorpe/home.nix; }
+              {
+                home-manager.users.emmathorpe.imports = [
+                  ./emmathorpe/home
+                  ./emmathorpe/home/desktop.nix
+                ];
+              }
             ];
           };
 
@@ -116,7 +126,7 @@
               ./emmathorpe/swaywm.nix
               {
                 home-manager.users.emmathorpe.imports = [
-                  ./emmathorpe/home.nix
+                  ./emmathorpe/home
                   ./system/modules/work/default.nix
                 ];
               }
