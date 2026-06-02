@@ -5,14 +5,14 @@
 # NixOS-WSL specific options are documented on the NixOS-WSL repository:
 # https://github.com/nix-community/NixOS-WSL
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports = [
-    # include NixOS-WSL modules
-    <nixos-wsl/modules>
-  ];
-
 
   wsl = {
     enable = true;
@@ -22,7 +22,7 @@
     wslConf.network.generateHosts = false;
     startMenuLaunchers = true;
     docker-desktop.enable = false;
-        extraBin = with pkgs; [
+    extraBin = with pkgs; [
       # Binaries for Docker Desktop wsl-distro-proxy
       { src = "${coreutils}/bin/mkdir"; }
       { src = "${coreutils}/bin/cat"; }
@@ -33,7 +33,7 @@
       { src = "${su}/bin/usermod"; }
     ];
   };
-  
+
   virtualisation.docker = {
     enable = true;
     enableOnBoot = true;
@@ -42,10 +42,13 @@
 
   networking.resolvconf.enable = false;
 
-  ## patch the script 
+  ## patch the script
   systemd.services.docker-desktop-proxy.script = lib.mkForce ''${config.wsl.wslConf.automount.root}/wsl/docker-desktop/docker-desktop-user-distro proxy --docker-desktop-root ${config.wsl.wslConf.automount.root}/wsl/docker-desktop "C:\Program Files\Docker\Docker\resources"'';
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   features.swayDesktop.enable = false;
   nixpkgs.config.allowUnfree = true;
   programs.nix-ld.enable = true;
