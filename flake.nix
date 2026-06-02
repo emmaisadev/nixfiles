@@ -3,8 +3,9 @@
 
   inputs = {
 	nixpkgs.url = "nixpkgs/nixos-unstable";
+	nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 	home-manager.url = "github:nix-community/home-manager";
-	home-manager.inputs.nixpkgs.follows = "nixpkgs";
+  home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ { self, nixpkgs, home-manager, ... }: {
@@ -49,9 +50,10 @@
         {
 	        home-manager.useGlobalPkgs = true;
 	        home-manager.useUserPackages = true;
+	        home-manager.extraSpecialArgs = { inherit inputs; };
 
           home-manager.users.emmathorpe.imports = [ ./emmathorpe/home.nix ./system/modules/work/default.nix ];
-      }
+        }
       ];
     };
   };
