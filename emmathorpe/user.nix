@@ -6,7 +6,7 @@
 		isNormalUser = true;
 		home = "/home/emmathorpe";
 		description = "Emma Thorpe";
-		extraGroups = [ "wheel" ];
+		extraGroups = [ "wheel" "docker" ];
 		shell = pkgs.zsh;
 		packages =  lib.mkIf (config.features.swayDesktop.enable == true) [
 			pkgs.legcord
