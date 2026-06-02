@@ -3,6 +3,10 @@
 # pulled onto the headless WSL host.
 { pkgs, lib, ... }:
 {
+  imports = [
+    ./sway.nix
+  ];
+
   home.packages = [
     pkgs.element-desktop
     pkgs.legcord

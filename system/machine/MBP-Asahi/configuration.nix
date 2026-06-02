@@ -49,6 +49,9 @@
 
   features.swayDesktop.enable = true;
 
+  # Allow swaylock to authenticate (no fingerprint reader on this machine).
+  security.pam.services.swaylock = { };
+
   # Specify path to peripheral firmware files.
   hardware.asahi.peripheralFirmwareDirectory = ../../modules/firmware;
 

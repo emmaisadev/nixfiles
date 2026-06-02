@@ -30,15 +30,13 @@ in
                 export WINIT_UNIX_BACKEND=x11
                 export MOZ_ENABLE_WAYLAND=1
         			'';
+      # Core Wayland utilities. The lock screen, idle daemon, status bar and
+      # notification daemon are configured per-user in home/sway.nix.
       extraPackages = with pkgs; [
         brightnessctl
         foot
         grim
-        swayidle
-        swaylock
-        i3status-rust
         sway-launcher-desktop
-        dunst
         pavucontrol
       ];
     };
